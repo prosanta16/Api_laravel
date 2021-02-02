@@ -30,5 +30,8 @@ Route::delete('delete/{id}',[UserController::class,'delete']);
 
 //search
 Route::get('search/{name}',[UserController::class,'search']);
+//validate
+Route::post('validate',[UserController::class,'testData']);
+
 
 

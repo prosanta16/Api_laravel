@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Device;
+use Validator;
 
 class UserController extends Controller
 {
@@ -68,6 +69,33 @@ class UserController extends Controller
       function search($name)
       {
         return Device::where("name","like","%".$name."%")->get();
+        
+      }
+      function testData(Request $req)
+      {
+        $rules=array(
+          "name"=>"required",
+          "member_id"=>"required |max:4"
+        );
+        $validator= Validator::make($req->all(),$rules);
+        if($validator->fails()){
+          return response()->json($validator->errors(),401);
+        }
+        else{
+          $device=new Device;
+          $device->name=$req->name;
+          $device->member_id=$req->member_id;
+          $data=$device->save();
+          if($data)
+          {
+            return ["result"=>"Data has been saved"];
+          }
+          else
+          {
+          return ["result"=>"operation has been failed"];
+          }
+        }
+        
         
       }
  }
