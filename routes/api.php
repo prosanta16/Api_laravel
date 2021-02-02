@@ -28,3 +28,7 @@ Route::put('update',[UserController::class,'update']);
 //delete
 Route::delete('delete/{id}',[UserController::class,'delete']);
 
+//search
+Route::get('search/{name}',[UserController::class,'search']);
+
+

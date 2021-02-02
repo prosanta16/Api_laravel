@@ -65,4 +65,9 @@ class UserController extends Controller
           return ["result"=>"delete operation failed"];
         }
       }
+      function search($name)
+      {
+        return Device::where("name","like","%".$name."%")->get();
+        
+      }
  }
